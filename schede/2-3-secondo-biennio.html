@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+  /* =========================
+   Palette (requested)
+   ========================= */
+:root{
+  --ink: #000;
+  --pink: rgb(238, 44, 130);
+  --coral: rgb(251, 105, 98);
+  --red: #cf2e2e;
+  --paper: #fff;
+
+  --border: rgba(0,0,0,0.12);
+  --muted: rgba(0,0,0,0.68);
+  --soft: rgba(0,0,0,0.06);
+}
+
+/* =========================
+   Print setup (A4)
+   ========================= */
+@page{
+  size: A4;
+  margin: 16mm;
+}
+
+/* Prevent ugly page splits inside boxes */
+.box, .card, .grid, .rubrica, .section{
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 12.5pt;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+/* =========================
+   Page container (centered)
+   ========================= */
+.page{
+  width: 210mm;                /* A4 width */
+  min-height: 297mm;           /* A4 height */
+  margin: 0 auto;
+  padding: 16mm;
+  background: var(--paper);
+  position: relative;
+}
+
+/* Screen nicety: add breathing space */
+@media screen{
+  body{ background: #fff; }
+  .page{
+    margin: 18px auto;
+    border: 1px solid var(--border);
+    box-shadow: 0 18px 60px rgba(0,0,0,0.08);
+  }
+}
+
+/* Top accent line */
+.page::before{
+  content:"";
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--pink), var(--coral), var(--red));
+}
+
+/* =========================
+   Header
+   ========================= */
+.header{
+  margin-top: 6mm;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10mm;
+  align-items: start;
+  padding-bottom: 6mm;
+  border-bottom: 1px solid var(--border);
+}
+
+h1{
+  margin: 0;
+  font-size: 20pt;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.badges{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.badge{
+  font-size: 9.5pt;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  position: relative;
+}
+
+.badge::before{
+  content:"";
+  display: inline-block;
+  width: 9px; height: 9px;
+  border-radius: 999px;
+  background: var(--pink);
+  margin-right: 8px;
+  vertical-align: -1px;
+}
+
+.badge.alt::before{ background: var(--coral); }
+.badge.red::before{ background: var(--red); }
+
+.meta{
+  margin-top: 2mm;
+  color: var(--muted);
+  font-size: 10.5pt;
+}
+.full-width-white{
+  width: 100vw;
+  background: #fff;
+
+  /* attaccata in alto */
+  margin-top: 0;
+
+  /* padding SOLO sotto */
+  padding-bottom: 0px;
+
+  /* tecnica full-bleed */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+/* =========================
+   Sections and cards
+   ========================= */
+.section{
+  margin-top: 8mm;
+}
+
+.section-title{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 4mm 0;
+  font-size: 12.5pt;
+  letter-spacing: 0.01em;
+}
+
+.section-title::before{
+  content:"";
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--pink);
+}
+
+.section-title.alt::before{ background: var(--coral); }
+.section-title.red::before{ background: var(--red); }
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+}
+
+/* responsive for screen (optional) */
+@media screen and (max-width: 900px){
+  .page{ width: min(210mm, 96vw); padding: 14mm; }
+  .grid{ grid-template-columns: 1fr; }
+  .header{ grid-template-columns: 1fr; }
+  .badges{ align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+}
+
+.card{
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after{
+  content:"";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(238,44,130,0.18), rgba(251,105,98,0.10), rgba(207,46,46,0.08), rgba(0,0,0,0) 70%);
+}
+
+.label{
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 9.5pt;
+  color: rgba(0,0,0,0.78);
+  margin-bottom: 6px;
+}
+
+.text{
+  white-space: pre-wrap; /* preserve newlines from CSV */
+  color: var(--ink);
+}
+
+/* Bullet-like look for dash lists */
+.text{
+  padding-left: 0;
+}
+.text p{ margin: 0; }
+.text ul{ margin: 0; padding-left: 18px; }
+.text li{ margin: 0 0 4px 0; }
+
+/* =========================
+   Footer
+   ========================= */
+.footer{
+  margin-top: 10mm;
+  padding-top: 5mm;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  gap: 10mm;
+  font-size: 9.5pt;
+  color: var(--muted);
+}
+
+.footer .mark{
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.footer .mark span{
+  color: var(--pink);
+}
+
+/* =========================
+   Open table rows
+   ========================= */
+.row{
+  margin-top: 7mm;        /* interlinea tra "righe" */
+}
+
+.row-title{
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 14pt;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.row-title::before{
+  content:"";
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--pink);
+}
+
+.row-title.coral::before{ background: var(--coral); }
+.row-title.red::before{ background: var(--red); }
+
+.row-content{
+  padding-left: 20px;     /* allineamento "da tabella" */
+  white-space: pre-wrap; /* mantiene a-capo dal CSV */
+  line-height: 1.5;
+}
+.print-btn{
+  position: absolute;
+  top: 10mm;
+  right: 12mm;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.print-btn i{
+  color: var(--red); /* icona PDF in palette */
+  font-size: 14px;
+}
+
+.print-btn:hover{
+  border-color: rgba(0,0,0,0.25);
+  transform: translateY(-1px);
+}
+
+.print-btn:active{
+  transform: translateY(0);
+}
+
+@media print{
+  .print-btn{ display: none; } /* non stampare il pulsante */
+}
+
+
+  </style>
+</head>
+<body>
+<div class="full-width-white">
+<center><a href="../index.html"><img src="immagini/header.png" width="50%"></a></center>
+</div>
+  <div class="page">
+  <button class="print-btn" onclick="window.print()" title="Stampa / Salva in PDF">
+  <i class="fas fa-file-pdf"></i>
+  <span>PDF</span>
+  </button>
+  
+  <h1>2.3. Sviluppare le competenze di cittadinanza tramite le tecnologie digitali</h1>
+
+  <div class="row">
+    <div class="row-title pink">Biennio</div>
+    <div class="row-content">secondo biennio</div>
+  </div>
+
+  <div class="row">
+    <div class="row-title pink">Attività didattica</div>
+    <div class="row-content">Conoscere alcuni siti ufficiali messi a disposizione dei cittadini dalle principali Istituzioni del territorio
+
+Conoscere l’esistenza di siti di informazione ufficiali
+
+utilizzare il proprio account istituzionale per accedere alle applicazioni di Google Workspace durante i lavori collaborativi
+
+rispondere a sondaggi interni, proposti dall’insegnante</div>
+  </div>
+
+  <div class="row">
+    <div class="row-title red">Strumenti</div>
+    <div class="row-content">pc, tablet, chromebook
+piattaforma di Istituto (Google Workspace)
+Piattaforma Programma il futuro (attività per la scuola primaria - Corso C)</div>
+  </div>
+
+  <div class="row">
+    <div class="row-title coral">Esempi di proposte didattiche</div>
+    <div class="row-content">Andiamo in gita a…
+Realizzare una ricerca sulla meta del viaggio di istruzione proposto per la classe utilizzando i siti dei luoghi/musei che si visiteranno.
+Al termine, rispondere a un sondaggio (o questionario) predisposto dall’insegnante e condiviso tramite link, inviandolo correttamente.</div>
+  </div>
+
+  </div>
+</body>
+</html>
