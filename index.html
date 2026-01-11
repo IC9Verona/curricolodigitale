@@ -212,6 +212,38 @@ details.area[open] summary::after{
   h1{ font-size: 18pt; }
 }
 
+/* ======================================================
+   LEGENDA FINALE
+   ====================================================== */
+
+.legenda{
+  margin: 60px auto 0 auto;   /* centra orizzontalmente */
+  padding-top: 10px;
+  max-width: 1200px;          /* limite di larghezza */
+}
+
+.legenda h2{
+  text-align: center;
+  font-size: 18pt;
+  margin-bottom: 30px;
+}
+
+.legenda-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+
+  /* centra la griglia */
+  justify-items: stretch;
+  align-items: start;
+}
+
+.legenda-area{
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--border);
+}
 
   </style>
 </head>
@@ -412,6 +444,70 @@ Il curricolo può essere letto sia in maniera navigabile che scaricato in <a hre
 
 </div>
 
+<div class="page">
+<div class="text"><h2>Legenda delle competenze</h2></div>
+</div>
+
+<section class="legenda">
+
+  <div class="legenda-grid">
+     <div class="legenda-area">
+      <p><center>Di seguito sono riportate le diciture delle aree e delle competenze, così come proposte dal progetto pilota <a href"https://crealatuaimprontadigitale.it/" target="_blank"><b>Crea la tua impronta digitale</b></a>.
+	 </center></p>
+	 <center><img src="immagini/ID-logo_orizzontale.PNG" width="95%"></center>
+    </div>
+    <div class="legenda-area">
+      <h3>Area 1 · Informazione e data literacy</h3>
+      <ul>
+        <li><strong>1.1</strong> Navigare, ricercare e filtrare dati, informazioni e contenuti digitali</li>
+        <li><strong>1.2</strong> Valutare dati, informazioni e contenuti digitali</li>
+        <li><strong>1.3</strong> Gestire dati, informazioni e contenuti digitali</li>
+      </ul>
+    </div>
+
+    <div class="legenda-area">
+      <h3>Area 2 · Comunicazione e collaborazione</h3>
+      <ul>
+        <li><strong>2.1</strong> Interagire tramite le tecnologie digitali</li>
+        <li><strong>2.2</strong> Condividere tramite le tecnologie digitali</li>
+        <li><strong>2.3</strong> Sviluppare le competenze di cittadinanza tramite le tecnologie digitali</li>
+        <li><strong>2.4</strong> Sviluppare forme di collaborazione tramite le tecnologie digitali</li>
+        <li><strong>2.5</strong> Netiquette</li>
+        <li><strong>2.6</strong> Gestire l’identità digitale</li>
+      </ul>
+    </div>
+
+    <div class="legenda-area">
+      <h3>Area 3 · Creazione di contenuti digitali</h3>
+      <ul>
+        <li><strong>3.1</strong> Sviluppare contenuti digitali</li>
+        <li><strong>3.2</strong> Integrare e rielaborare contenuti digitali</li>
+        <li><strong>3.3</strong> Copyright e licenze</li>
+        <li><strong>3.4</strong> Programmazione</li>
+      </ul>
+    </div>
+
+    <div class="legenda-area">
+      <h3>Area 4 · Sicurezza</h3>
+      <ul>
+        <li><strong>4.1</strong> Proteggere i dispositivi</li>
+        <li><strong>4.2</strong> Proteggere i dati personali e la privacy</li>
+        <li><strong>4.3</strong> Tutelare la salute e il benessere</li>
+        <li><strong>4.4</strong> Proteggere l’ambiente</li>
+      </ul>
+    </div>
+
+    <div class="legenda-area">
+      <h3>Area 5 · Problem Solving</h3>
+      <ul>
+        <li><strong>5.1</strong> Risolvere i problemi tecnici</li>
+        <li><strong>5.2</strong> Identificare i bisogni e le soluzioni tecnologici</li>
+        <li><strong>5.3</strong> Utilizzare le tecnologie digitali in modo creativo</li>
+        <li><strong>5.4</strong> Identificare gli squilibri nelle competenze digitali</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 
 </div>
