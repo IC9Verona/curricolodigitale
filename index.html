@@ -1,365 +1,420 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <title>Area 2.1 — Cittadinanza digitale: impronta e privacy</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Curricolo Digitale – Bienni</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <style>
-  /* =========================
-   Palette (requested)
-   ========================= */
+ /* ======================================================
+   PALETTE & VARIABILI
+   ====================================================== */
 :root{
   --ink: #000;
   --pink: rgb(238, 44, 130);
   --coral: rgb(251, 105, 98);
   --red: #cf2e2e;
+  --plum: rgb(128, 36, 93);
+
   --paper: #fff;
+  --bg: #2861A0;
 
   --border: rgba(0,0,0,0.12);
-  --muted: rgba(0,0,0,0.68);
-  --soft: rgba(0,0,0,0.06);
+  --muted: rgba(0,0,0,0.65);
 }
 
-/* =========================
-   Print setup (A4)
-   ========================= */
-@page{
-  size: A4;
-  margin: 16mm;
-}
-
-/* Prevent ugly page splits inside boxes */
-.box, .card, .grid, .rubrica, .section{
-  break-inside: avoid;
-  page-break-inside: avoid;
-}
-
+/* ======================================================
+   RESET BASE
+   ====================================================== */
 *{ box-sizing: border-box; }
 
 html, body{
-  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body{
   margin: 0;
-  background: var(--paper);
+  font-family: "Oxygen", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--ink);
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  font-size: 12.5pt;
-  line-height: 1.45;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: geometricPrecision;
-}
 
-/* =========================
-   Page container (centered)
-   ========================= */
-.page{
-  width: 210mm;                /* A4 width */
-  min-height: 297mm;           /* A4 height */
-  margin: 0 auto;
-  padding: 16mm;
-  background: var(--paper);
+  /* immagine di sfondo */
+  background-image: url("immagini/sfondo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
   position: relative;
 }
-
-/* Screen nicety: add breathing space */
-@media screen{
-  body{ background: #fff; }
-  .page{
-    margin: 18px auto;
-    border: 1px solid var(--border);
-    box-shadow: 0 18px 60px rgba(0,0,0,0.08);
-  }
-}
-
-/* Top accent line */
-.page::before{
+body::before{
   content:"";
-  position: absolute;
-  left: 0; right: 0; top: 0;
-  height: 6px;
-  background: linear-gradient(90deg, var(--pink), var(--coral), var(--red));
+  position: fixed;
+  inset: 0;
+
+  background: rgba(20, 35, 70, 0.45); /* blu scuro trasparente */
+  -webkit-backdrop-filter: blur(5px);
+
+  z-index: -1;
 }
 
-/* =========================
-   Header
-   ========================= */
+/* ======================================================
+   CONTENITORE PAGINA
+   ====================================================== */
+.page{
+  width: min(1320px, 96vw);
+  margin: 20px auto;
+  padding: 20px 20px 24px 20px;
+}
+
+/* ======================================================
+   HEADER
+   ====================================================== */
 .header{
-  margin-top: 6mm;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 10mm;
-  align-items: start;
-  padding-bottom: 6mm;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--pink);
 }
 
 h1{
   margin: 0;
-  font-size: 20pt;
-  line-height: 1.08;
+  font-size: 22pt;
   letter-spacing: -0.02em;
+  text-align: center;
+  padding: 20px 20px 40px 20px;
 }
-
-.badges{
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-end;
-}
-
-.badge{
-  font-size: 9.5pt;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
+.full-width-white{
+  width: 100vw;
   background: #fff;
-  position: relative;
+
+  /* attaccata in alto */
+  margin-top: 0;
+
+  /* padding SOLO sotto */
+  padding-bottom: 0px;
+
+  /* tecnica full-bleed */
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
-
-.badge::before{
-  content:"";
-  display: inline-block;
-  width: 9px; height: 9px;
-  border-radius: 999px;
-  background: var(--pink);
-  margin-right: 8px;
-  vertical-align: -1px;
+.text{
+  margin: 0;
+  font-size: 15pt;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 18px;
+  letter-spacing: -0.02em;
+  text-align: center;
+  padding: 20px 20px 20px 20px;
 }
-
-.badge.alt::before{ background: var(--coral); }
-.badge.red::before{ background: var(--red); }
-
-.meta{
-  margin-top: 2mm;
-  color: var(--muted);
-  font-size: 10.5pt;
-}
-
-/* =========================
-   Sections and cards
-   ========================= */
-.section{
-  margin-top: 8mm;
-}
-
-.section-title{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 4mm 0;
-  font-size: 12.5pt;
-  letter-spacing: 0.01em;
-}
-
-.section-title::before{
-  content:"";
-  width: 14px;
-  height: 14px;
-  border-radius: 4px;
-  background: var(--pink);
-}
-
-.section-title.alt::before{ background: var(--coral); }
-.section-title.red::before{ background: var(--red); }
-
-.grid{
+/* ======================================================
+   GRID BIENNI
+   ====================================================== */
+.bienni-grid{
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5mm;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
-/* responsive for screen (optional) */
-@media screen and (max-width: 900px){
-  .page{ width: min(210mm, 96vw); padding: 14mm; }
-  .grid{ grid-template-columns: 1fr; }
-  .header{ grid-template-columns: 1fr; }
-  .badges{ align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
-}
-
-.card{
+/* Singolo biennio */
+.biennio{
+  --accent: var(--pink); /* default */
+  background: var(--paper);
+  border-radius: 18px;
+  padding: 16px;
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 12px 14px;
-  background: #fff;
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 
-.card::after{
-  content:"";
-  position: absolute;
-  right: -40px;
-  top: -40px;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(238,44,130,0.18), rgba(251,105,98,0.10), rgba(207,46,46,0.08), rgba(0,0,0,0) 70%);
-}
-
-.label{
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 9.5pt;
-  color: rgba(0,0,0,0.78);
-  margin-bottom: 6px;
-}
-
-.text{
-  white-space: pre-wrap; /* preserve newlines from CSV */
-  color: var(--ink);
-}
-
-/* Bullet-like look for dash lists */
-.text{
-  padding-left: 0;
-}
-.text p{ margin: 0; }
-.text ul{ margin: 0; padding-left: 18px; }
-.text li{ margin: 0 0 4px 0; }
-
-/* =========================
-   Footer
-   ========================= */
-.footer{
-  margin-top: 10mm;
-  padding-top: 5mm;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  gap: 10mm;
-  font-size: 9.5pt;
-  color: var(--muted);
-}
-
-.footer .mark{
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.footer .mark span{
-  color: var(--pink);
-}
-
-/* =========================
-   Open table rows
-   ========================= */
-.row{
-  margin-top: 7mm;        /* interlinea tra "righe" */
-}
-
-.row-title{
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+/* Titolo biennio */
+.biennio h2{
+  margin: 0 0 14px 0;
+  text-align: center;
   font-size: 14pt;
-  padding-bottom: 4px;
-  margin-bottom: 6px;
-  border-bottom: 2px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-weight: 800;
+  color: var(--accent);
+}
+/* Sottotitolo biennio */
+.biennio h4{
+  margin: 0 0 14px 0;
+  text-align: center;
+  font-size: 12.5pt;
+  font-weight: 400;
+  color: var(--accent);
 }
 
-.row-title::before{
-  content:"";
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-  background: var(--pink);
-}
 
-.row-title.coral::before{ background: var(--coral); }
-.row-title.red::before{ background: var(--red); }
-
-.row-content{
-  padding-left: 20px;     /* allineamento "da tabella" */
-  white-space: pre-wrap; /* mantiene a-capo dal CSV */
-  line-height: 1.5;
-}
-.print-btn{
-  position: absolute;
-  top: 10mm;
-  right: 12mm;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 999px;
+/* ======================================================
+   TOGGLE AREE (COLORE PALETTE)
+   ====================================================== */
+details.area{
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 10px;
   border: 1px solid var(--border);
-  background: #fff;
-  color: var(--ink);
-  font-weight: 700;
+}
+
+/* Titolo toggle */
+details.area summary{
   cursor: pointer;
+  padding: 10px 14px;
+  font-weight: 700;
+  font-size: 11.5pt;
+  list-style: none;
+  position: relative;
+  background: var(--accent);
+  color: #fff;
 }
 
-.print-btn i{
-  color: var(--red); /* icona PDF in palette */
-  font-size: 14px;
+details.area summary::marker{ display:none; }
+
+details.area summary::after{
+  content:"▾";
+  position:absolute;
+  right:14px;
+  top:50%;
+  transform: translateY(-50%);
+  transition: transform .2s ease;
+  color: #fff;
 }
 
-.print-btn:hover{
-  border-color: rgba(0,0,0,0.25);
-  transform: translateY(-1px);
+details.area[open] summary::after{
+  transform: translateY(-50%) rotate(180deg);
 }
 
-.print-btn:active{
-  transform: translateY(0);
+/* Contenuto toggle */
+.area-content{
+  padding: 10px 14px 14px 14px;
+  background: #fff;
 }
 
-@media print{
-  .print-btn{ display: none; } /* non stampare il pulsante */
+.area-content a{
+  display: block;
+  padding: 4px 0;
+  font-size: 10.8pt;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.area-content a::before{
+  content: "⇩ ";
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.area-content a:hover{
+  text-decoration: underline;
+}
+
+/* ======================================================
+   RESPONSIVE
+   ====================================================== */
+@media (max-width: 900px){
+  h1{ font-size: 18pt; }
 }
 
 
   </style>
 </head>
+
 <body>
-  <div class="page">
-  <button class="print-btn" onclick="window.print()" title="Stampa / Salva in PDF">
-  <i class="fa-solid fa-file-pdf"></i>
-  <span>PDF</span>
-  </button>
-  
-  <h1>Area 2.1 — Cittadinanza digitale: impronta e privacy</h1>
-  
-  <div class="row">
-  <div class="row-title pink">Obiettivi</div>
-  <div class="row-content">- Comprendere il concetto di impronta digitale
+<div class="full-width-white">
+<center><img src="immagini/header.png" width="50%"></center>
+</div>
+<div class="page">
+<div class="text">
+Il curricolo può essere letto sia in maniera navigabile che scaricato in <a href="#">formato PDF <i class="fas fa-file-pdf"></i>
+</a>
+</div>
+</div>
+<div class="page">
 
-- Riconoscere dati personali e sensibili
+<div class="bienni-grid">
 
-- Saper impostare regole base di privacy</div>
+  <section class="biennio" style="--accent: var(--pink);">
+    <h2>Primo biennio</h2>
+    <h4>Prima e seconda primaria</h4>
+
+    <details class="area" open>
+      <summary>Area 1 · Informazione e data literacy</summary>
+      <div class="area-content">
+        <a href="schede/1-1-primo-biennio.html" target="_blank">1.1. Navigare, ricercare e filtrare dati, informazioni e contenuti digitali</a>
+        <a href="schede/1-3-primo-biennio.html" target="_blank">1.3. Gestire dati, informazioni e contenuti digitali</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 2 · Comunicazione e collaborazione</summary>
+      <div class="area-content">
+        <a href="schede/2-2-primo-biennio.html" target="_blank">2.2. Condividere tramite le tecnologie digitali</a>
+        <a href="schede/2-4-primo-biennio.html" target="_blank">2.4. Sviluppare forme di collaborazione tramite le tecnologie digitali</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 3 · Creazione di contenuti digitali</summary>
+      <div class="area-content">
+        <a href="schede/3-1-primo-biennio.html" target="_blank">3.1. Sviluppare contenuti digitali</a>
+        <a href="schede/3-2-primo-biennio.html" target="_blank">3.2. Integrare e rielaborare contenuti digitali</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 4 · Sicurezza</summary>
+      <div class="area-content">
+        <a href="schede/4-3-primo-biennio.html" target="_blank">4.3. Tutelare la salute e il benessere</a>
+        <a href="schede/4-4-primo-biennio.html" target="_blank">4.4. Proteggere l’ambiente</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 5 · Problem Solving</summary>
+      <div class="area-content">
+        <a href="schede/5-1-primo-biennio.html" target="_blank">5.1. Risolvere i problemi tecnici</a>
+      </div>
+    </details>
+  </section>
+
+  <section class="biennio" style="--accent: var(--coral);">
+    <h2>Secondo biennio</h2>
+    <h4>Terza e quarta primaria</h4>
+
+    <details class="area" open>
+      <summary>Area 1 · Informazione e data literacy</summary>
+      <div class="area-content">
+        <a href="schede/1-1-secondo-biennio.html" target="_blank">1.1. Navigare, ricercare e filtrare dati, informazioni e contenuti digitali</a>
+        <a href="schede/1-3-secondo-biennio.html" target="_blank">1.3. Gestire dati, informazioni e contenuti digitali</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 2 · Comunicazione e collaborazione</summary>
+      <div class="area-content">
+        <a href="schede/2-2-secondo-biennio.html" target="_blank">2.2. Condividere tramite le tecnologie digitali</a>
+        <a href="schede/2-3-secondo-biennio.html" target="_blank">2.3. Sviluppare le competenze di cittadinanza tramite le tecnologie digitali</a>
+        <a href="schede/2-4-secondo-biennio.html" target="_blank">2.4. Sviluppare forme di collaborazione tramite le tecnologie digitali</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 3 · Creazione di contenuti digitali</summary>
+      <div class="area-content">
+        <a href="schede/3-1-secondo-biennio.html" target="_blank">3.1. Sviluppare contenuti digitali</a>
+        <a href="schede/3-2-secondo-biennio.html" target="_blank">3.2. Integrare e rielaborare contenuti digitali</a>
+        <a href="schede/3-4-secondo-biennio.html" target="_blank">3.4. Programmazione</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 4 · Sicurezza</summary>
+      <div class="area-content">
+        <a href="schede/4-1-secondo-biennio.html" target="_blank">4.1. Proteggere i dispositivi</a>
+        <a href="schede/4-3-secondo-biennio.html" target="_blank">4.3. Tutelare la salute e il benessere</a>
+        <a href="schede/4-4-secondo-biennio.html" target="_blank">4.4. Proteggere l’ambiente</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 5 · Problem Solving</summary>
+      <div class="area-content">
+        <a href="schede/5-1-secondo-biennio.html" target="_blank">5.1. Risolvere i problemi tecnici</a>
+      </div>
+    </details>
+  </section>
+
+  <section class="biennio" style="--accent: var(--red);">
+    <h2>Terzo biennio</h2>
+    <h4>Quinta primaria e prima secondaria</h4>
+
+    <details class="area" open>
+      <summary>Area 1 · Informazione e data literacy</summary>
+      <div class="area-content">
+        <a href="schede/1-1-terzo-biennio.html" target="_blank">1.1. Navigare, ricercare e filtrare dati, informazioni e contenuti digitali</a>
+        <a href="schede/1-3-terzo-biennio.html" target="_blank">1.3. Gestire dati, informazioni e contenuti digitali</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 2 · Comunicazione e collaborazione</summary>
+      <div class="area-content">
+        <a href="schede/2-1-terzo-biennio.html" target="_blank">2.1. Interagire tramite le tecnologie digitali</a>
+        <a href="schede/2-2-terzo-biennio.html" target="_blank">2.2. Condividere tramite le tecnologie digitali</a>
+        <a href="schede/2-3-terzo-biennio.html" target="_blank">2.3. Sviluppare le competenze di cittadinanza tramite le tecnologie digitali</a>
+        <a href="schede/2-4-terzo-biennio.html" target="_blank">2.4. Sviluppare forme di collaborazione tramite le tecnologie digitali</a>
+        <a href="schede/2-5-terzo-biennio.html" target="_blank">2.5. Netiquette</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 3 · Creazione di contenuti digitali</summary>
+      <div class="area-content">
+        <a href="schede/3-1-terzo-biennio.html" target="_blank">3.1. Sviluppare contenuti digitali</a>
+        <a href="schede/3-2-terzo-biennio.html" target="_blank">3.2. Integrare e rielaborare contenuti digitali</a>
+        <a href="schede/3-4-terzo-biennio.html" target="_blank">3.4. Programmazione</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 4 · Sicurezza</summary>
+      <div class="area-content">
+        <a href="schede/4-1-terzo-biennio.html" target="_blank">4.1. Proteggere i dispositivi</a>
+        <a href="schede/4-2-terzo-biennio.html" target="_blank">4.2. Proteggere i dati personali e la privacy</a>
+        <a href="schede/4-3-terzo-biennio.html" target="_blank">4.3. Tutelare la salute e il benessere</a>
+        <a href="schede/4-4-terzo-biennio.html" target="_blank">4.4. Proteggere l’ambiente</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 5 · Problem Solving</summary>
+      <div class="area-content">
+        <a href="schede/5-3-terzo-biennio.html" target="_blank">5.3. Utilizzare le tecnologie digitali in modo creativo</a>
+      </div>
+    </details>
+  </section>
+
+  <section class="biennio" style="--accent: var(--plum);">
+    <h2>Quarto biennio</h2>
+    <h4>Seconda e terza secondaria</h4>
+
+    <details class="area" open>
+      <summary>Area 1 · Informazione e data literacy</summary>
+      <div class="area-content">
+        <a href="schede/1-1-quarto-biennio.html" target="_blank">1.1. Navigare, ricercare e filtrare dati, informazioni e contenuti digitali</a>
+        <a href="schede/1-2-quarto-biennio.html" target="_blank">1.2. Valutare dati, informazioni e contenuti digitali</a>
+        <a href="schede/1-3-quarto-biennio.html" target="_blank">1.3. Gestire dati, informazioni e contenuti digitali</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 2 · Comunicazione e collaborazione</summary>
+      <div class="area-content">
+        <a href="schede/2-2-quarto-biennio.html" target="_blank">2.2. Condividere tramite le tecnologie digitali</a>
+        <a href="schede/2-3-quarto-biennio.html" target="_blank">2.3. Sviluppare le competenze di cittadinanza tramite le tecnologie digitali</a>
+        <a href="schede/2-5-quarto-biennio.html" target="_blank">2.5. Netiquette</a>
+        <a href="schede/2-6-quarto-biennio.html" target="_blank">2.6. Gestire l’identità digitale</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 3 · Creazione di contenuti digitali</summary>
+      <div class="area-content">
+        <a href="schede/3-1-quarto-biennio.html" target="_blank">3.1. Sviluppare contenuti digitali</a>
+        <a href="schede/3-3-quarto-biennio.html" target="_blank">3.3. Copyright e licenze</a>
+      </div>
+    </details>
+
+    <details class="area">
+      <summary>Area 4 · Sicurezza</summary>
+      <div class="area-content">
+        <a href="schede/4-2-quarto-biennio.html" target="_blank">4.2. Proteggere i dati personali e la privacy</a>
+      </div>
+    </details>
+  </section>
+
 </div>
 
-<div class="row">
-  <div class="row-title coral">Attività</div>
-  <div class="row-content">1) Brainstorming: quali tracce lasciamo online?
 
-2) Analisi guidata: profilo social fittizio (cosa è pubblico/cosa no)
 
-3) Mini-laboratorio: impostazioni privacy (simulazione)
-
-4) Restituzione: regole della classe per l&#39;uso consapevole</div>
 </div>
 
-<div class="row">
-  <div class="row-title red">Strumenti</div>
-  <div class="row-content">PC/Chromebook
-
-Proiettore
-
-Scheda di lavoro (PDF)
-
-Connessione internet</div>
-</div>
-
-  </div>
 </body>
 </html>
